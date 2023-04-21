@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Page</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "/admin/raw",
+                type: "GET",
+                success: function(data) {
+                    $('#admin-id').text(data.aid);
+                    $('#admin-name').text(data.name);
+                    $('#admin-pw').text(data.password);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error fetching data');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Admin Page</h1>
+<p>Admin ID: <span id="admin-id"></span></p>
+<p>Admin Name: <span id="admin-name"></span></p>
+<p>Admin Email: <span id="admin-pw"></span></p>
+</body>
+</html>
