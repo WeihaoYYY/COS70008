@@ -3,8 +3,13 @@ package com.example.rcca.Services;
 import com.example.rcca.Entities.AdminRepository;
 import com.example.rcca.Entities.Administrator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -17,7 +22,7 @@ public class AdminService {
         adminRepo.save(admin);
     }
 
-    public Administrator getById(Long id) {
+    public Administrator findById(Long id) {
         return adminRepo.findById(id).orElse(null);
     }
 
@@ -26,8 +31,16 @@ public class AdminService {
     }
 
     public Boolean ifExist(Long id){
-        if (getById(id) != null) return true;
-        else return false;
+        return findById(id) != null;
+    }
+
+    public List<Administrator> pagination(Integer pageNum,Integer pageSize) {
+
+        PageRequest pageRequest = PageRequest.of(pageNum, pageSize);
+
+        Page<Administrator> admin = adminRepo.findAll(pageRequest);
+
+        return admin.getContent();
     }
 
 }

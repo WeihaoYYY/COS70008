@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Items Page</title>
+</head>
+<body>
+<h1>Items Page</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Item ID</th>
+    <th>Item Name</th>
+    <th>Item Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="item : ${items.content}">
+    <td th:text="${item.id}"></td>
+    <td th:text="${item.name}"></td>
+    <td th:text="${item.description}"></td>
+  </tr>
+  </tbody>
+</table>
+<div>
+  <ul>
+    <li th:if="${items.hasPrevious()}">
+      <a th:href="@{/items(page=${items.previousPageable().pageNumber})}">Previous</a>
+    </li>
+    <li th:each="pageNumber : ${items.pageNumbers}" th:class="${pageNumber == items.number + 1} ? 'active'">
+      <a th:href="@{/items(page=${pageNumber - 1})}" th:text="${pageNumber}"></a>
+    </li>
+    <li th:if="${items.hasNext()}">
+      <a th:href="@{/items(page=${items.nextPageable().pageNumber})}">Next</a>
+    </li>
+  </ul>
+</div>
+</body>
+</html>
