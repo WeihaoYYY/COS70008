@@ -1,5 +1,6 @@
 package com.example.rcca.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "administrators")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 public class Administrator{
 
     @Id
@@ -27,6 +29,8 @@ public class Administrator{
 
     private String answer;
 
+    private String role = "ROLE_ADMIN";
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Administrator created_by;
 
@@ -36,6 +40,7 @@ public class Administrator{
         this.security_question = security_question;
         this.answer = answer;
         this.created_by = created_by;
+        this.role = "ADMIN";
     }
 
 }

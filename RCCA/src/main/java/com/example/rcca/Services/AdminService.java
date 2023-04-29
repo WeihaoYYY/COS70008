@@ -5,7 +5,6 @@ import com.example.rcca.Entities.Administrator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +24,15 @@ public class AdminService {
     public Administrator findById(Long id) {
         return adminRepo.findById(id).orElse(null);
     }
+
+    public Administrator findByName(String name) {
+        return adminRepo.findByName(name);
+    }
+
+    public String findRoleByName(String name) {
+        return adminRepo.findRoleByName(name);
+    }
+
 
     public void delete(Long id) {
         adminRepo.deleteById(id);

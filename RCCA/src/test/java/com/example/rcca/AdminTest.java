@@ -1,7 +1,9 @@
 package com.example.rcca;
 
 import com.example.rcca.Entities.Administrator;
+import com.example.rcca.Entities.Item;
 import com.example.rcca.Services.AdminService;
+import com.example.rcca.Services.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ class AdminTest { //这里不能加transactional，加了所有测试数据都�
 
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private ItemService itemService;
 
     @Test
     void newRecord() {
@@ -27,8 +31,24 @@ class AdminTest { //这里不能加transactional，加了所有测试数据都�
     }
 
     @Test
-    void page(){
+    void findByName(){
+        Administrator admin = adminService.findByName("Jack");
+        log.warn("Admin - {}", admin);
+        System.out.println(admin);
+    }
 
+    @Test
+    void createItem(){
+        Item item = new Item("Jack", "title", "description");
+        System.out.println(item);
+        itemService.save(item);
+
+        //itemService.approval(1L);
+    }
+
+    @Test
+    void approval(){
+        itemService.approval(1L);
     }
 
 }
