@@ -31,7 +31,7 @@ public class Administrator{
 
     private String role = "ROLE_ADMIN";
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)  //fetch = FetchType.LAZY
     private Administrator created_by;
 
     public Administrator(String name, String password, String security_question, String answer, Administrator created_by) {

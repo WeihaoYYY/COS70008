@@ -33,6 +33,10 @@ public class AdminService {
         return adminRepo.findRoleByName(name);
     }
 
+    public List<Administrator> search (String type, String keyword) {
+        return adminRepo.search(type, keyword);
+    }
+
 
     public void delete(Long id) {
         adminRepo.deleteById(id);

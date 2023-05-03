@@ -75,7 +75,12 @@ public class AdminController {
         return "redirect:/item/index";
     }
 
-
+        @GetMapping("/{type}/{keyword}")
+    public List<Administrator> search(
+            @PathVariable("type") String type,
+            @PathVariable("keyword") String keyword) {
+        return adminService.search(type, keyword);
+    }
 
 }
 

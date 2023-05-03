@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @SpringBootTest
 @Slf4j
 class AdminTest { //这里不能加transactional，加了所有测试数据都会回滚
@@ -50,5 +52,13 @@ class AdminTest { //这里不能加transactional，加了所有测试数据都�
     void approval(){
         itemService.approval(1L);
     }
+
+    @Test
+    void search() {
+        List<Administrator> list = adminService.search("two", "a");
+        for(Administrator o : list){
+            System.out.println(o);
+        }
+     }
 
 }

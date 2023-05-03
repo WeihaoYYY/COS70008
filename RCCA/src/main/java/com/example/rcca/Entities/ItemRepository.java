@@ -12,4 +12,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query(value = "UPDATE Item i SET i.status = 1 WHERE i.rid = :id")
     void approval(@Param("id") Long id);
 
+//    @Query()
+
 }
