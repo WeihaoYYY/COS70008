@@ -1,0 +1,128 @@
+-- drop table digitized_item;
+-- drop table item;
+
+--
+-- Table structure for table item
+--
+CREATE TABLE `item` (
+  item_id int(11) NOT NULL AUTO_INCREMENT,
+  item_status varchar(4) NOT NULL,
+  item_type varchar(5) NOT NULL,
+  item_title varchar(500) NOT NULL,
+  item_subject varchar(2000) NOT NULL,
+  item_source varchar(2000),
+  item_rights varchar(2000),
+  item_relation varchar(2000),
+  item_publlisher varchar(1000),
+  item_language varchar(10) NOT NULL DEFAULT 'en',
+  item_identifier varchar(500),
+  item_format varchar(3),
+  item_descr longtext,
+  item_date_period date,
+  item_creator varchar(500),
+  item_coverage varchar(2000),
+  item_contributor varchar(2000),
+  item_create_date datetime NOT NULL,
+  item_appr_rej_date datetime,
+  item_rejected_reason varchar(2000),
+  PRIMARY KEY (item_id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table digitized_item
+--
+CREATE TABLE `digitized_item` (
+  dig_id int(11) NOT NULL AUTO_INCREMENT,
+  dig_item_id int(11) NOT NULL,
+  dig_descr longtext,
+  dig_file_type varchar(5) NOT NULL,
+  dig_file_name varchar(255) NOT NULL,
+  dig_file_name_org varchar(255) NOT NULL,
+  dig_create_date datetime NOT NULL,
+  PRIMARY KEY (dig_id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
+-- Indexes creation
+--
+ALTER TABLE digitized_item ADD KEY idx_dig_item_id (dig_item_id);
+
+--
+-- Foreign keys creation
+--
+ALTER TABLE digitized_item ADD CONSTRAINT fk_dig_item FOREIGN KEY (dig_item_id) REFERENCES item (item_id);
+
+
+--
+-- Testing data examples
+--
+INSERT INTO item
+  (item_status, item_type, item_title, item_subject, item_source, item_rights, item_relation, item_publlisher,
+   item_language, item_identifier, item_format, item_descr, item_date_period, item_creator, item_coverage,
+   item_contributor, item_create_date, item_appr_rej_date, item_rejected_reason)
+VALUES
+  ('APPR', 'ADNW', '5 years Landrover for sales', 'landrover sales 4-wheel-drive car', NULL, NULL, NULL, 'The Australian',
+   'en', 'P.16','PHY', '5 years Landrover, silver, 4-wheel-drive, with air-condition, good condition, $45,000', '2023-04-20', NULL, NULL,
+   NULL, '2023-04-20 16:20:22', '2023-04-21 11:30:41', NULL);
+
+INSERT INTO item
+  (item_status, item_type, item_title, item_subject, item_source, item_rights, item_relation, item_publlisher,
+   item_language, item_identifier, item_format, item_descr, item_date_period, item_creator, item_coverage,
+   item_contributor, item_create_date, item_appr_rej_date, item_rejected_reason)
+VALUES
+  ('PEND', 'ARTJL', 'Can regular services extend the life of your car?', 'car serives life', NULL, NULL, NULL, 'Car Journals',
+   'en', 'Vol issue 1, P.10-20', NULL, 'Car regular services', '2023-04-22', 'John M. Brown', NULL,
+   NULL, '2023-04-25 11:33:12', NULL, NULL);
+
+INSERT INTO item
+  (item_status, item_type, item_title, item_subject, item_source, item_rights, item_relation, item_publlisher,
+   item_language, item_identifier, item_format, item_descr, item_date_period, item_creator, item_coverage,
+   item_contributor, item_create_date, item_appr_rej_date, item_rejected_reason)
+VALUES
+  ('APPR', 'BKTEC', 'Ten ways to keep your car in good conditions', 'car good condition ways', NULL, NULL, NULL, 'RCCA',
+   'en', 'ISBN1234567890333', 'PHY', 'How to keep your car in good conditions', '2023-01-15', 'Roger Rice', NULL,
+   NULL, '2023-04-26 18:23:00', '2023-04-27 12:00:17', NULL);
+
+INSERT INTO item
+  (item_status, item_type, item_title, item_subject, item_source, item_rights, item_relation, item_publlisher,
+   item_language, item_identifier, item_format, item_descr, item_date_period, item_creator, item_coverage,
+   item_contributor, item_create_date, item_appr_rej_date, item_rejected_reason)
+VALUES
+  ('REJD', 'SALBR', 'Sales brochure for meat', 'sales meat brochure', NULL, NULL, NULL, 'Good Meat Pty Ltd',
+   'en', NULL, NULL, 'Sales brochure with price for meat', '2023-04-01', NULL, NULL,
+   NULL, '2023-04-03 17:45:02', '2023-04-05 09:15:22', 'Not relevant');
+
+INSERT INTO item
+  (item_status, item_type, item_title, item_subject, item_source, item_rights, item_relation, item_publlisher,
+   item_language, item_identifier, item_format, item_descr, item_date_period, item_creator, item_coverage,
+   item_contributor, item_create_date, item_appr_rej_date, item_rejected_reason)
+VALUES
+  ('APPR', 'PHPER', 'Personal photos collection of Landrover', 'landrover photo', NULL, NULL, NULL, 'Collection of Landrover',
+   'en', 'ISBN9876543210001', 'OTH', 'Personal collection', '2023-03-22', 'James Bond', NULL,
+   NULL, '2023-04-01 19:41:16', '2023-04-02 15:15:38', NULL);
+
+INSERT INTO digitized_item
+  (dig_item_id, dig_descr, dig_file_type, dig_file_name, dig_file_name_org, dig_create_date)
+VALUES
+  (5, 'Landrover collection', 'DOC', 'PC_P6_Rover3500S_RoverCompany_1971_1.docx', 'PC_P6_Rover3500S_RoverCompany_1971.docx', '2023-04-01 20:00:01');
+
+INSERT INTO digitized_item
+  (dig_item_id, dig_descr, dig_file_type, dig_file_name, dig_file_name_org, dig_create_date)
+VALUES
+  (5, 'Landrover collection', 'JPG', 'PC_P6_BritishMotorHeritage_1971-ROVER-P6-2000TC_2.jpg', 'PC_P6_BritishMotorHeritage_1971-ROVER-P6-2000TC.jpg', '2023-04-01 20:03:33');
+
+INSERT INTO digitized_item
+  (dig_item_id, dig_descr, dig_file_type, dig_file_name, dig_file_name_org, dig_create_date)
+VALUES
+  (5, 'Landrover collection', 'JPG', 'PC_P6_BritishMotorHeritage_1964-ROVER-P6-2000_3.jpg', 'PC_P6_BritishMotorHeritage_1964-ROVER-P6-2000.jpg', '2023-04-01 20:05:26');
+
+
+INSERT INTO item
+  (item_status, item_type, item_title, item_subject, item_source, item_rights, item_relation, item_publlisher,
+   item_language, item_identifier, item_format, item_descr, item_date_period, item_creator, item_coverage,
+   item_contributor, item_create_date, item_appr_rej_date, item_rejected_reason)
+VALUES
+  ('PEND', 'PHCOM', 'Photo Album of Benz', 'album photo benz', NULL, NULL, NULL, 'ABC Benz Ltd',
+   'de', 'ISBN9999888833331', 'DIM', 'Benz collection', '2023-04-15', 'City Benz Pty Ltd', 'Expensive car',
+   'City Benz Pty Ltd', '2023-04-20 18:22:33', NULL, NULL);
