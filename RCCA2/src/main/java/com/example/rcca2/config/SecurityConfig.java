@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -17,7 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
-public class SecurityConfig {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //private AdminService loginService;
 
@@ -52,8 +53,19 @@ public class SecurityConfig {
         return manager;
     }
 
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .anyRequest().permitAll()//.anyRequest().permitAll()//除了/r/**，其它的请求可以访问
+                //.antMatchers("/**").authenticated()//所有/r/**的请求必须认证通过
+                .and()
+                .formLogin();//允许表单登录
+                //.successForwardUrl("/");//自定义登录成功的页面地址
+    }
 
-//    @Bean
+
+//    @Bean  //此方法适用于Spring3以后
 //    public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
 //        http.authorizeHttpRequests()
 //                // 用户具有system:user权限时允许访问/role

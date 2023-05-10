@@ -23,6 +23,8 @@ public class AdminController {
     @Autowired
     private ItemService itemService;
 
+
+
     @GetMapping
     public List<Administrator> pagination2() {
         return adminService.pagination(0, 5);
