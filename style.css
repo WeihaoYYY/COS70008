@@ -1,0 +1,117 @@
+.headingnav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.logo {
+  width: 50px;
+}
+
+.formdiv {
+  display: flex;
+  justify-content: center;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background-color: rgb(229, 229, 225);
+}
+
+.uploadbtn {
+  display: flex;
+  justify-content: center;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.formsection {
+  height: 88vh;
+  padding-top: 100px;
+  /* padding-bottom: 80px; */
+  padding-left: 300px;
+  padding-right: 300px;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 0, 0.5),
+      rgba(0, 0, 255, 0.5)
+    ),
+    url("background_image.jpg");
+}
+/* 
+.carousel {
+  padding-left: 10px;
+  padding-right: 10px;
+} */
+
+.list li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.titlelink {
+  text-decoration: none;
+}
+.title {
+  font-size: large;
+  margin-bottom: 0px;
+}
+.detail {
+  width: 324px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.author,
+.creationdate {
+  font-size: small;
+}
+
+
+/* for detail page - start */
+.content{
+	max-width:100%;
+	margin:auto;
+}
+
+.content .heading{
+	font-size:20pt;
+	font-weight: bold;
+	color:#004071;
+	line-height: 1.3em;
+	margin: 20px 0px;
+}
+
+.content .body{
+	line-height: 1.3em;
+	color:#000;
+	font-size: 15px;
+	font-weight: normal;
+	overflow:auto;
+	margin:20px;
+	border-radius:15px;
+	box-shadow:3px 3px 15px #666;
+	padding:20px 20px;
+}
+
+.content .pic{
+	width:10%;
+}
+
+.content td{
+	padding: 5px;
+	vertical-align: top;
+}
+
+.content td .label{
+	font-size:11pt;
+	font-weight: bold;
+	color:#004071;
+}
+
+/* for detail page - end */
