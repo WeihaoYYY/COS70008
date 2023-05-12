@@ -107,7 +107,7 @@
     </nav>
 
     <!-- upload form -->
-    <form action="upload.php" method="post" enctype="multipart/form-data">
+    <form id="upload-form" method="post" enctype="multipart/form-data">
       <label for="file">Choose a file to upload:</label>
       <input type="file" name="file" id="file" />
       <select
@@ -124,25 +124,29 @@
 
       <div class="row mb-3">
         <label for="title" class="col-sm-3 col-form-label">File Title:</label>
-        <div class="col-sm-4">
+        <div class="col-sm-9">
           <input
             type="text"
             name="title"
             id="title"
             class="form-control"
+            placeholder="required"
             required
           />
         </div>
       </div>
 
       <div class="row mb-3">
-        <label for="author" class="col-sm-3 col-form-label">Author Name:</label>
-        <div class="col-sm-4">
+        <label for="car_model" class="col-sm-3 col-form-label"
+          >Car Model:</label
+        >
+        <div class="col-sm-9">
           <input
             type="text"
-            name="author"
-            id="author"
+            name="car_model"
+            id="car_model"
             class="form-control"
+            placeholder="required"
             required
           />
         </div>
@@ -150,47 +154,15 @@
 
       <div class="row mb-3">
         <label for="publisher" class="col-sm-3 col-form-label"
-          >Publisher Name:</label
+          >Publisher:</label
         >
-        <div class="col-sm-4">
+        <div class="col-sm-9">
           <input
             type="text"
             name="publisher"
             id="publisher"
             class="form-control"
-            required
-          />
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <label for="date" class="col-sm-3 col-form-label">Date:</label>
-        <div class="col-sm-4">
-          <!-- <div class="input-group date" id="datepicker"> -->
-          <input
-            type="date"
-            name="date"
-            id="date"
-            class="form-control"
-            required
-          />
-          <!-- <span class="input-group-append">
-              <span class="input-group-text bg-white"
-                ><i class="fa fa-calendar"></i>
-              </span>
-            </span> -->
-          <!-- </div> -->
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <label for="user" class="col-sm-3 col-form-label">Your Name:</label>
-        <div class="col-sm-4">
-          <input
-            type="text"
-            name="user"
-            id="user"
-            class="form-control"
+            placeholder="required"
             required
           />
         </div>
@@ -206,23 +178,206 @@
             name="description"
             id="description"
             class="form-control"
+            placeholder="required"
             required
           />
         </div>
       </div>
 
-      <input type="submit" name="submit" value="Upload" class="uploadbtn" />
-    </form>
-    <!-- <div class="input-group mb-3">
-      <input type="file" class="form-control" id="inputGroupFile02" />
-      <label class="input-group-text" for="inputGroupFile02">Upload</label>
-    </div> -->
+      <div class="row mb-3">
+        <label for="date" class="col-sm-3 col-form-label">Publish Date:</label>
+        <div class="col-sm-9">
+          <!-- <div class="input-group date" id="datepicker"> -->
+          <input
+            type="date"
+            name="date"
+            id="date"
+            class="form-control"
+            placeholder="required"
+            required
+          />
+          <!-- <span class="input-group-append">
+              <span class="input-group-text bg-white"
+                ><i class="fa fa-calendar"></i>
+              </span>
+            </span> -->
+          <!-- </div> -->
+        </div>
+      </div>
 
-    <!-- <script type="text/JavaScript">
-      $(function () {
-        $('#datepicker').datepicker();
-      });
-    </script> -->
+      <div class="row mb-3">
+        <label for="last_updated_date" class="col-sm-3 col-form-label"
+          >Last Updated Date:</label
+        >
+        <div class="col-sm-9">
+          <!-- <div class="input-group date" id="datepicker"> -->
+          <input
+            type="date"
+            name="last_updated_date"
+            id="last_updated_date"
+            class="form-control"
+            placeholder="optional"
+          />
+          <!-- <span class="input-group-append">
+              <span class="input-group-text bg-white"
+                ><i class="fa fa-calendar"></i>
+              </span>
+            </span> -->
+          <!-- </div> -->
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="creator" class="col-sm-3 col-form-label">Your Name:</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            name="creator"
+            id="creator"
+            class="form-control"
+            placeholder="required"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="creator_email" class="col-sm-3 col-form-label"
+          >Your Email:</label
+        >
+        <div class="col-sm-9">
+          <input
+            type="email"
+            name="creator_email"
+            id="creator_email"
+            class="form-control"
+            placeholder="required"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="relation" class="col-sm-3 col-form-label">Relation:</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            name="relation"
+            id="relation"
+            class="form-control"
+            placeholder="optional"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="rights" class="col-sm-3 col-form-label">Rights:</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            name="rights"
+            id="rights"
+            class="form-control"
+            placeholder="optional"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="source" class="col-sm-3 col-form-label">Source:</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            name="source"
+            id="source"
+            class="form-control"
+            placeholder="optional"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="subject" class="col-sm-3 col-form-label">Subject:</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            name="subject"
+            id="subject"
+            class="form-control"
+            placeholder="optional"
+          />
+        </div>
+      </div>
+
+      <input
+        type="submit"
+        name="submit"
+        value="Upload"
+        class="uploadbtn"
+        onclick="return validateForm();"
+      />
+    </form>
+
+    <!-- popup message -->
+    <div id="success-popup" class="popup">
+      <p>Submission successful!</p>
+      <button onclick="closePopup()">Close</button>
+    </div>
+    <div id="overlay" class="overlay"></div>
+
+    <script>
+      function showSuccessPopup() {
+        // Show the success pop-up
+        document.getElementById("success-popup").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+
+        // Hide the pop-up after 3 seconds (adjust the duration as needed)
+        setTimeout(function () {
+          document.getElementById("success-popup").style.display = "none";
+          document.getElementById("overlay").style.display = "none";
+        }, 3000);
+      }
+
+      function closePopup() {
+        document.getElementById("success-popup").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+      }
+
+      function validateForm() {
+        // Validate the form fields
+        var fileInput = document.getElementById("file");
+        var titleInput = document.getElementById("title");
+        var carModelInput = document.getElementById("car_model");
+        var publisherinput = document.getElementById("publisher");
+        var descriptioninput = document.getElementById("description");
+        var dateinput = document.getElementById("date");
+        var creatorinput = document.getElementById("creator");
+        var creator_emailinput = document.getElementById("creator_email");
+        // Add validations for other fields as needed
+
+        // Check if all required fields are filled
+        if (
+          fileInput.value === "" ||
+          titleInput.value === "" ||
+          carModelInput.value === "" ||
+          publisherinput.value === "" ||
+          descriptioninput.value === "" ||
+          dateinput.value === "" ||
+          creatorinput.value === "" ||
+          creator_emailinput.value === ""
+        ) {
+          // Show error message or perform other validations as needed
+          alert("Complete the required information");
+          return false; // Prevent form submission
+        }
+
+        // Show the success pop-up message
+        showSuccessPopup();
+        // alert("sucessful");
+
+        return true; // Allow form submission
+      }
+    </script>
   </body>
   <footer class="text-center text-white" style="background-color: #777576">
     <!-- Grid container -->
