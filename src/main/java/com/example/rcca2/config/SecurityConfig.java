@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest().permitAll()//.anyRequest().permitAll()//除了/r/**，其它的请求可以访问
                 //.antMatchers("/**").authenticated()//所有/r/**的请求必须认证通过
-                .and()
+                .and().csrf().disable()
                 .formLogin();//允许表单登录
                 //.successForwardUrl("/");//自定义登录成功的页面地址
     }

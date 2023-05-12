@@ -18,6 +18,10 @@ public class ItemService {
     @Autowired
     ItemRepository repo;
 
+    public List<Item> findAll() {
+        return repo.findAll();
+    }
+
     public void delete(Long id) {
         repo.deleteById(id);
     }

@@ -20,6 +20,8 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rid = 0L;
 
+    private String contributor;
+
     private String creator;
 
     private String creator_email;
