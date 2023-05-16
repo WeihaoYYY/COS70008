@@ -1,8 +1,10 @@
 package com.example.rcca2.config;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -56,13 +58,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll()//.anyRequest().permitAll()//除了/r/**，其它的请求可以访问
                 //.antMatchers("/**").authenticated()//所有/r/**的请求必须认证通过
                 .and().csrf().disable()
                 .formLogin();//允许表单登录
                 //.successForwardUrl("/");//自定义登录成功的页面地址
     }
+
 
 
 //    @Bean  //此方法适用于Spring3以后

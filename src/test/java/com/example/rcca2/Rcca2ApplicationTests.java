@@ -22,4 +22,9 @@ class Rcca2ApplicationTests {
         }
     }
 
+    @Test
+    void approval(){
+        itemService.approval(24L, 2);
+    }
+
 }

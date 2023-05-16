@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Item List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>Item List</h1>
+<div id="itemList"></div>
+
+<script>
+    $(document).ready(function() {
+        // 发送 Ajax 请求获取数据
+        $.ajax({
+            url: "/admin/unapp",  // 控制器的请求路径
+            type: "GET",
+            success: function(data) {
+                displayItemList(data);  // 调用函数展示数据
+                console.log(data);
+            },
+            error: function() {
+                console.log("Error occurred while fetching data.");
+            }
+        });
+
+        // 展示 Item 数据
+        function displayItemList(items) {
+            var itemListContainer = $("#itemList");
+
+            // 清空容器内容
+            itemListContainer.empty();
+
+            // 遍历 items 数组，并添加数据到容器中
+            $.each(items, function(index, item) {
+                var itemInfo = $("<p>").text("RID: " + item.rid + ", Contributor: " + item.contributor);
+                itemListContainer.append(itemInfo);
+            });
+        }
+    });
+</script>
+</body>
+</html>
+<script>
+
+</script>
+

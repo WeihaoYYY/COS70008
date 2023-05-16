@@ -18,6 +18,14 @@ public class ItemService {
     @Autowired
     ItemRepository repo;
 
+    public List<Item> findUnapp(){
+        return repo.searchItemsByStatusEquals(0);
+    }
+
+    public List<Item> findApp(){
+        return repo.searchItemsByStatusEquals(1);
+    }
+
     public List<Item> findAll() {
         return repo.findAll();
     }
@@ -26,8 +34,8 @@ public class ItemService {
         repo.deleteById(id);
     }
 
-    public void approval(Long id) {
-        repo.approval(id);
+    public void approval(Long rid, int status) {
+        repo.approval(rid, status);
     }
 
     public Item findById(Long id) {

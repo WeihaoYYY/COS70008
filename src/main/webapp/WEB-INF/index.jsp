@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: Shiqi
@@ -47,11 +48,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Admin Login</a>
+          <a class="nav-link" href="${pageContext.request.contextPath}/admin/index">Admin Login</a>
         </li>
         <li class="nav-item">
           <!-- all the category will in one upload page, they have the same form, I will create later. -->
-          <a class="nav-link" href="${pageContext.request.contextPath}/item/upload">Upload</a>
+          <a class="nav-link" href="${pageContext.request.contextPath}/item/ut1">Upload</a>
         </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -95,7 +96,7 @@
       <input
               type="text"
               name="search"
-              placeholder="Enter your search term"
+              placeholder="Search iterm by title"
               aria-label="Search"
               class="form-control me-1"
       />
@@ -112,7 +113,17 @@
     <div class="card mb-3 mt-3" style="width: 800px">
       <div class="row g-0">
         <div class="col-md-4">
-          <img src="http://rovercarclubaust.asn.au/wp-content/uploads/2015/01/rccabadge.jpg" class="logo img-fluid rounded-start" alt="list_image" />
+<%--          <img src="http://rovercarclubaust.asn.au/wp-content/uploads/2015/01/rccabadge.jpg" class="logo img-fluid rounded-start" alt="list_image" />--%>
+          <c:set var="fileFormat" value="${ad.file_format}" />
+          <c:set var="fileFormatLc" value="${fn:toLowerCase(fileFormat)}" />
+          <c:choose>
+            <c:when test="${fileFormatLc eq 'jpg' or fileFormatLc eq 'png'}">
+              <img src="${ad.file_path}" class="logo img-fluid rounded-start" alt="list_image" />
+            </c:when>
+            <c:otherwise>
+              <img src="/static/asset/documentImage.png" class="logo img-fluid rounded-start" alt="list_image" />
+            </c:otherwise>
+          </c:choose>
         </div>
         <div class="col-md-12">
           <div class="card-body">

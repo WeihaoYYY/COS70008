@@ -96,7 +96,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Admin Login</a>
+          <a class="nav-link" href="${pageContext.request.contextPath}/admin/index">Admin Login</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="${pageContext.request.contextPath}/item/upload">Upload</a>
@@ -227,8 +227,7 @@
               path="creator"
               id="creator"
               class="form-control"
-              placeholder="required"
-              required="required"
+              placeholder="Creator"
       />
     </div>
   </div>
@@ -254,7 +253,7 @@
               path="publish_date"
               id="date"
               class="form-control"
-              placeholder="required"
+              placeholder="publish date"
       />
 
     </div>
@@ -300,8 +299,70 @@
     </div>
   </div>
 
-  <input type="submit" value="Upload" class="uploadbtn" />
+  <input type="submit" value="Upload" class="uploadbtn"/>
 </form:form>
+
+<%--<!-- popup message -->--%>
+<%--<div id="success-popup" class="popup">--%>
+<%--  <p>Submission successful!</p>--%>
+<%--  <button onclick="closePopup()">Close</button>--%>
+<%--</div>--%>
+<%--<div id="overlay" class="overlay"></div>--%>
+
+<%--<script>
+  function showSuccessPopup() {
+    // Show the success pop-up
+    document.getElementById("success-popup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+
+    // Hide the pop-up after 3 seconds (adjust the duration as needed)
+    setTimeout(function () {
+      console.log("-----------------------")
+      document.getElementById("success-popup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }, 3000);
+  }
+
+  function closePopup() {
+    document.getElementById("success-popup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+  }
+
+  function validateForm() {
+    // Validate the form fields
+    var fileInput = document.getElementById("file");
+    var titleInput = document.getElementById("title");
+    var carModelInput = document.getElementById("car_model");
+    var publisherinput = document.getElementById("publisher");
+    var descriptioninput = document.getElementById("description");
+    var dateinput = document.getElementById("date");
+    var creatorinput = document.getElementById("creator");
+    var creator_emailinput = document.getElementById("creator_email");
+    // Add validations for other fields as needed
+
+    // Check if all required fields are filled
+    if (
+            fileInput.value === "" ||
+            titleInput.value === "" ||
+            carModelInput.value === "" ||
+            publisherinput.value === "" ||
+            descriptioninput.value === "" ||
+            dateinput.value === "" ||
+            creatorinput.value === "" ||
+            creator_emailinput.value === ""
+    ) {
+      // Show error message or perform other validations as needed
+      alert("Complete the required information");
+      return false; // Prevent form submission
+    }
+
+    // Show the success pop-up message
+    showSuccessPopup();
+    // alert("sucessful");
+
+    return true; // Allow form submission
+  }
+</script>--%>
 
 </body>
 <footer class="text-center text-white" style="background-color: #777576">

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: Shiqi
@@ -20,7 +21,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>result1</title>
+    <title>Details</title>
     <link href="/static/css/style.css" rel="stylesheet" />
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -29,15 +30,22 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type= text/javascript>
+        function openFile(url) {
+            window.open(url, 'newwindow', 'width=5000,height=3000,screenX=300,screenY=100');
+        }
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/item/index"
-        ><img
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/item/index">
+            <img
                 src="http://rovercarclubaust.asn.au/wp-content/uploads/2015/01/rccabadge.jpg"
                 class="logo"
-        /></a>
+            />
+        </a>
         <button
                 class="navbar-toggler"
                 type="button"
@@ -52,11 +60,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Admin Login</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/admin/index">Admin Login</a>
                 </li>
                 <li class="nav-item">
                     <!-- all the category will in one upload page, they have the same form, I will create later. -->
-                    <a class="nav-link" href="${pageContext.request.contextPath}/item/upload">Upload</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/item/ut1">Upload</a>
                 </li>
                 <!-- <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -83,55 +91,88 @@
     </div>
 </nav>
 
-<section
-        class="main bg-imgage"
->
-    <h1 class="text-center fs-3 pt-5">${item.title}</h1>
-    <div class="d-flex justify-content-center">
-        <span class="description">
-            ${item.description}
-        </span>
+<section>
+    <div style="margin:20px;">
+        <table class="content">
+                <tr class="body">
+                    <td class="pic">
+                        <c:set var="jspFormat" value="jsp" />
+                        <c:set var="pngFormat" value="png" />
+                        <c:set var="fileFormat" value="${ad.file_format}" />
+                        <c:set var="fileFormatLc" value="${fn:toLowerCase(fileFormat)}" />
+
+                        <c:choose>
+                            <c:when test="${fileFormatLc eq 'jpg' or fileFormatLc eq 'png'}">
+                                <a onclick="openFile('${ad.file_path}'); return false;"><img src="${ad.file_path}" title="Click to view"></a>
+                            </c:when>
+                            <c:otherwise>
+                                <a onclick="openFile('${ad.file_path}'); return false;"><img src="/static/asset/documentImage.png" class="notImage" title="Click to view"></a>
+                            </c:otherwise>
+                        </c:choose>
+
+
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-secondary" onclick="openFile('${ad.file_path}'); return false;">View</button>
+                        </div>
+                    </td>
+
+                    <td class="detail">
+                        <div class="heading">${ad.title}</div>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td class="label">Description:</td>
+                                    <td colspan="3">${ad.description}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Publisher:</td>
+                                    <td>${ad.publisher}</td>
+                                    <td class="label">Publish Date:</td>
+                                    <td>${ad.publish_date}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Subject:</td>
+                                    <td>${ad.subject}</td>
+                                    <td class="label">Car model:</td>
+                                    <td>${ad.car_model}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Language:</td>
+                                    <td>${ad.language}</td>
+                                    <td class="label">Identifier:</td>
+                                    <td>${ad.identifier}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Creator:</td>
+                                    <td>${ad.creator}</td>
+                                    <td class="label">Contributor email:</td>
+                                    <td>${ad.creator_email}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Contributor:</td>
+                                    <td>${ad.contributor}</td>
+                                    <td class="label">Rights:</td>
+                                    <td>${ad.rights}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Source:</td>
+                                    <td>${ad.source}</td>
+                                    <td class="label">Relation:</td>
+                                    <td>${ad.relation}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+        </table>
     </div>
-    <div class="d-flex justify-content-center">
-        <a href="${item.file_path}" class="btn btn-secondary"
-        >Click to View or Download</a
-        >
-    </div>
 
-
-    <%--    <!-- detailed information flex div -->--%>
-    <div class="d-flex justify-content-center">
-        <div class="d-flex">
-            <div class="listleft">
-                <ul class="list">
-                    <li>Category: ${item.type}</li>
-                    <li>Car Model: ${item.car_model}</li>
-                    <li>Publisher: ${item.publisher}</li>
-                </ul>
-            </div>
-
-            <div class="listright">
-                <ul class="list">
-                    <li>Publish Date: ${item.publish_date}</li>
-                    <li>Language: EN</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <%--    <ul class="list">--%>
-    <%--        <li>Category: ${item.type}</li>--%>
-    <%--        <li>Car Model: ${item.car_model}</li>--%>
-    <%--        <li>Publisher: ${item.publisher}</li>--%>
-    <%--        <li>Publish Date: ${item.publish_date}</li>--%>
-    <%--&lt;%&ndash;        <li>Publisher: Regent Motors</li>&ndash;%&gt;--%>
-    <%--    </ul>--%>
     <hr />
 </section>
 
 
 <!-- interest part -->
-<h5>You may be interested in</h5>
+<h5>You may also be interested in</h5>
 <!-- <hr /> -->
 <div class="interest_container">
     <!-- item1 -->

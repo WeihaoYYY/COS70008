@@ -1,21 +1,25 @@
 package com.example.rcca2.Controllers;
 
 import com.example.rcca2.Entities.Administrator;
+import com.example.rcca2.Entities.Item;
 import com.example.rcca2.Services.AdminService;
 import com.example.rcca2.Services.ItemService;
 //import jakarta.annotation.security.RolesAllowed;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
 @Slf4j
-@Controller
+@RestController
 //@RolesAllowed("ADMIN")
 @RequestMapping("/admin")
+@ResponseBody
 public class AdminController {
 
     @Autowired
@@ -23,16 +27,29 @@ public class AdminController {
     @Autowired
     private ItemService itemService;
 
+    @GetMapping("/index")
+    public RedirectView redirectToGoogle() {
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://localhost:8080/index.html");
+        return redirectView;
+    }
+
+    @GetMapping("/findAll")
+    public List<Item> findAll() {
+        return itemService.findAll();
+    }
+
+    public static void getUsername() {
+        //Authentication是spring security中保存用户信息的对象，里面包含用户信息，权限信息，登录密码等。
+        // 可以通过SecurityContextHolder来获取Authentication对象，然后再获取用户信息
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getAuthorities());
+    }
 
 
     @GetMapping
     public List<Administrator> pagination2() {
         return adminService.pagination(0, 5);
-    }
-
-    @GetMapping("/index")
-    public String index(){
-        return "hello index";
     }
 
     @GetMapping("/raw")
@@ -55,9 +72,12 @@ public class AdminController {
         return admin;
     }
 
-    @PutMapping("/approval/{id}")
-    public void approval(@PathVariable("id") Long id) {
-        itemService.approval(id);
+    @GetMapping("/status/{rid}/{status}")
+    public RedirectView approval(@PathVariable("rid") Long rid, @PathVariable("status") int status) {
+        itemService.approval(rid, status);
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://localhost:8080/submission.html");
+        return redirectView;
     }
 
     @GetMapping("/login")
@@ -85,7 +105,10 @@ public class AdminController {
         return adminService.search(type, keyword);
     }
 
-
+    @GetMapping("/unapp")
+    public List<Item> unapp(){
+        return itemService.findUnapp();
+    }
 
 }
 

@@ -27,7 +27,8 @@
     cursor: pointer;
 }
 .formsection {
-    height: 88vh;
+    /* height: 88vh; */
+    height: 50vh;
     padding-top: 100px;
     /* padding-bottom: 80px; */
     padding-left: 300px;
@@ -119,3 +120,73 @@
     z-index: 9998;
     display: none; /* Hide the overlay by default */
 }
+
+/* for detail page - start */
+.content{
+    max-width:100%;
+    width:90%;
+    margin:auto;
+    border-collapse: separate;
+    border-spacing: 0px 15px;
+}
+
+.content .heading{
+    font-size:20pt;
+    font-weight: bold;
+    color:#004071;
+    line-height: 1.3em;
+    margin: 20px 0px;
+}
+
+.content .body{
+    line-height: 1.3em;
+    color:#000;
+    font-size: 15px;
+    font-weight: normal;
+    overflow:auto;
+    margin:20px;
+    border-radius:15px;
+    box-shadow:3px 3px 15px #666;
+    padding:20px 20px;
+}
+
+.content .pic{
+    width:30%;
+    padding: 0px 0px 15px 0px;
+}
+
+.content .detail{
+    width:69%;
+    padding: 0px 15px 15px 0px;
+}
+
+.content td{
+    padding: 5px;
+    vertical-align: top;
+    width: 35%;
+}
+
+.content td .label{
+    font-size:11pt;
+    font-weight: bold;
+    color:#004071;
+    width: 15%;
+}
+
+.content img {
+    width:90%;
+    height:90%;
+    margin:20px;
+}
+
+.content .notImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:60%;
+}
+
+.content img:hover {
+    cursor: pointer;
+}
+/* for detail page - end */

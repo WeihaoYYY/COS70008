@@ -37,6 +37,7 @@ public class ItemController {
     @Autowired
     private AdminService adminService;
 
+
     @RequestMapping(value = "/upload", method = RequestMethod.GET)
     public ModelAndView showForm() {
         return new ModelAndView("upload", "Item", new Item());
@@ -44,7 +45,7 @@ public class ItemController {
 
     @RequestMapping("/index")
     public String index(ModelMap modelMap) {
-        modelMap.addAttribute("list", itemService.findAll());
+        modelMap.addAttribute("list", itemService.findApp());
         return "index";
     }
 
@@ -137,7 +138,7 @@ public class ItemController {
     @RequestMapping("/detail")
     public ModelAndView detail(@RequestParam Long id) {
         ModelAndView mav = new ModelAndView("/detail");
-        mav.addObject("item", itemService.findById(id));
+        mav.addObject("ad", itemService.findById(id));
         return mav;
     }
 
@@ -149,7 +150,6 @@ public class ItemController {
     }
 
     @Transactional
-    @ResponseBody
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveItem(@ModelAttribute("item") Item i, @RequestParam("file") MultipartFile file ) {
         System.out.println("-----------SAVING------------");
@@ -188,9 +188,8 @@ public class ItemController {
 
     @RequestMapping(value = "/ut22", method = RequestMethod.POST)
     @ResponseBody
-    public void ut(@ModelAttribute("admin") Administrator i, @RequestParam("file") MultipartFile file) {
+    public void ut(@ModelAttribute("admin") Administrator a, @RequestParam("file") MultipartFile file) {
         System.out.println("-----------SAVING------------");
-        System.out.println(i);
         System.out.println(file);
         if (!file.isEmpty()) {
             try {
